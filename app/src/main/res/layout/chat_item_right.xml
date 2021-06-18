@@ -1,0 +1,53 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="300dp"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_Image"
+            android:visibility="gone"/>
+
+
+
+        <ImageView
+            android:id="@+id/messageIv"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_alignLeft="@+id/profile_Image"
+            android:layout_alignParentEnd="true"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+            android:background="@drawable/background_right"
+            android:maxWidth="300dp"
+            android:minWidth="100dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_launcher_round" />
+        <TextView
+            android:id="@+id/show_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_toStartOf="@+id/messageIv"
+            android:layout_toRightOf="@+id/profile_Image"
+            android:background="@drawable/background_right"
+            android:text="bhargav"
+            android:textColor="#ffff"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

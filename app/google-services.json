@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "597389706822",
+    "firebase_url": "https://my-message-20349.firebaseio.com",
+    "project_id": "my-message-20349",
+    "storage_bucket": "my-message-20349.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597389706822:android:c3b3a6d357e23666d22c47",
+        "android_client_info": {
+          "package_name": "com.example.mymessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597389706822-13745u0qjap82ckspidi2tkpvcui6jad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClr2bTEVxawVuN02mClA-viOYPa0XK6zo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597389706822-13745u0qjap82ckspidi2tkpvcui6jad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

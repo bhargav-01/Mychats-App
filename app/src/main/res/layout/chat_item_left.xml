@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/profile_Image"
+        android:background="#ffffff"
+        android:src="@drawable/ic_users_solid"/>
+
+    <ImageView
+        android:id="@+id/messageIv"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_alignLeft="@+id/profile_Image"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/ic_launcher_round"
+        android:adjustViewBounds="true"
+        android:background="@drawable/background_left"
+        android:maxWidth="300dp"
+        android:minWidth="100dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/show_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/profile_Image"
+        android:background="@drawable/background_left"
+        android:fontFamily="@font/montserrat"
+        android:minHeight="30dp"
+        android:padding="8dp"
+        android:text="hello1"
+        android:textColor="#070000"
+        android:textSize="20sp" />
+
+</LinearLayout>

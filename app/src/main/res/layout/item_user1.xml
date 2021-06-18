@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
+    android:orientation="horizontal"
+    android:layout_height="90dp"
+    android:layout_width="match_parent"
+    android:id="@+id/liniarLayout">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:padding="10dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="#ffffff">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="20dp"
+        android:elevation="20dp"
+        android:padding="10dp"
+        android:outlineAmbientShadowColor="#000000"
+        android:src="@drawable/ic_launcher_background"
+        tools:src="@tools:sample/avatars" />
+
+
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingRight="10dp"
+            android:orientation="vertical"
+            android:paddingLeft="110dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/name1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/muli_bold"
+                    android:foregroundGravity="center"
+                    android:text="contact"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/seen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/muli"
+                    android:paddingTop="5dp"
+                    android:text="12/12/21"
+                    android:textAlignment="textEnd"
+                    android:textColor="#8B9AA6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/muli"
+                android:foregroundGravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:text="contact"
+                android:textColor="#8B9AA6"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
+
+
+
+<!--</LinearLayout>-->

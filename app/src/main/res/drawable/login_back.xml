@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:height="800dp">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <solid android:color="#f9f9f9" />
+        </shape>
+    </item>
+
+
+    <item
+        android:width="400dp"
+        android:height="330dp"
+        android:bottom="200dp"
+        android:left="-90dp"
+        android:right="60dp"
+        android:top="-50dp">
+
+        <bitmap
+
+            android:src="@drawable/union_1" >
+
+        <item android:name="android:shadowColor">#33000000</item>
+        <item android:name="android:shadowDx">50</item>
+        <item android:name="android:shadowDy">50</item>
+        </bitmap>
+    </item>
+<!--    <item-->
+<!--        android:left="@dimen/peas_left"-->
+<!--        android:top="@dimen/peas_top">-->
+
+<!--    </item>-->
+<!--    <item-->
+<!--        android:right="@dimen/orange_right"-->
+<!--        android:bottom="@dimen/orange_bottom">-->
+<!--        <bitmap-->
+<!--            android:gravity="right|end|bottom"-->
+<!--            android:src="@drawable/ic_union_1" />-->
+<!--    </item>-->
+
+
+</layer-list>

@@ -1,0 +1,9 @@
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <corners android:radius="25dp" />
+        <gradient android:type="linear" android:useLevel="false" android:startColor="#ff079cff" android:endColor="#ff19f193" android:angle="0" />
+        <item android:name="android:shadowColor">#29000000</item>
+        <!-- TextView shadow offsets do not respect scale. -->
+        <item android:name="android:shadowDx">0</item>
+        <item android:name="android:shadowDy">3</item>
+</shape>
