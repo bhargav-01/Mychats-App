@@ -11,10 +11,18 @@ import android.widget.Toast;
 import com.example.mymessage.fragments.Adapter.ProfileFragment;
 import com.example.mymessage.fragments.ChatsFragment;
 import com.example.mymessage.fragments.UserFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.FirebaseInstanceId;
 import com.onesignal.OneSignal;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
@@ -29,8 +37,8 @@ public class navigationtryal extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_navigationtryal);
         animatedBottomBar =findViewById(R.id.bottom_bar);
-//        OneSignal.initWithContext(this);
-//        OneSignal.setAppId(ONESIGNAL_APP_ID);
+        
+        UpdateToken();
         if(savedInstanceState==null)
         {
             animatedBottomBar.selectTabById(R.id.tab_home,true);
@@ -70,5 +78,13 @@ public class navigationtryal extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void UpdateToken() {
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        String refreshtoken= FirebaseInstanceId.getInstance().getToken();
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("notificationKey",refreshtoken);
+        FirebaseDatabase.getInstance().getReference("user").child(firebaseUser.getUid()).updateChildren(map);
     }
 }

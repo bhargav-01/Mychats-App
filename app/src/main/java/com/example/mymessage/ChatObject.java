@@ -1,4 +1,4 @@
-package com.example.mymessage.chat;
+package com.example.mymessage;
 
 public class ChatObject {
     private  String chatId;

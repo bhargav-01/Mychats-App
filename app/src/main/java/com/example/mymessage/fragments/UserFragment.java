@@ -2,17 +2,14 @@ package com.example.mymessage.fragments;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +22,6 @@ import android.widget.Toast;
 import com.example.mymessage.R;
 import com.example.mymessage.User;
 import com.example.mymessage.fragments.Adapter.UserAdapter;
-import com.example.mymessage.fragments.Adapter.divider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

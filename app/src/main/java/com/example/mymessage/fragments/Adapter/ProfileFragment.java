@@ -44,7 +44,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.onesignal.OneSignal;
+//import com.onesignal.OneSignal;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.yalantis.ucrop.UCrop;
 
@@ -95,16 +95,17 @@ public class ProfileFragment extends Fragment {
 //        textabout=view.findViewById(R.id.about);
          aSwitch=view.findViewById(R.id.notification);
          edit=view.findViewById(R.id.edit);
+         //TODO
          aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
              @Override
              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                  if(!isChecked)
                  {
-                     OneSignal.setSubscription(false);
+//                     OneSignal.setSubscription(false);
                  }
                  else
                  {
-                     OneSignal.setSubscription(true);
+//                     OneSignal.setSubscription(true);
                  }
 
              }
@@ -135,7 +136,7 @@ public class ProfileFragment extends Fragment {
                          new DialogInterface.OnClickListener() {
                              public void onClick(DialogInterface dialog,
                                                  int which) {
-                                 OneSignal.setSubscription(false);
+//                                 OneSignal.setSubscription(false);
                                  FirebaseAuth.getInstance().signOut();
                                  startActivity(new Intent(getContext(), MainActivity.class));
                              }
@@ -154,6 +155,9 @@ public class ProfileFragment extends Fragment {
         mDb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (getActivity() == null) {
+                    return;
+                }
                 String phone = "";
                 String name = "";
                 String ImageURL = "";

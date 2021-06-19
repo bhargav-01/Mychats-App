@@ -1,59 +1,47 @@
 package com.example.mymessage.fragments;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.app.assist.AssistStructure;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.example.mymessage.BuildConfig;
+import com.example.mymessage.FcmNotificationsSender;
 import com.example.mymessage.R;
-import com.example.mymessage.User;
-import com.example.mymessage.chat.ChatObject;
+import com.example.mymessage.ChatObject;
 import com.example.mymessage.fragments.Adapter.MessageAdapter;
-import com.example.mymessage.fragments.Adapter.sendNotification;
 import com.example.mymessage.navigationtryal;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -66,32 +54,22 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.onesignal.OneSignal;
-import com.sothree.slidinguppanel.ScrollableViewHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+//import com.onesignal.OneSignal;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
 import java.security.SecureRandom;
-import java.security.spec.X509EncodedKeySpec;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -99,9 +77,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import static android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION;
 import static android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
-import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class MessageActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 101;
@@ -269,7 +245,9 @@ public class MessageActivity extends AppCompatActivity {
 //            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+
                  String msg1=msg_editText.getText().toString();
+                 String cm=msg1;
                 byte[] bs = new byte[0];
                 try {
                     bs = msg1.getBytes("UTF-8");
@@ -291,22 +269,18 @@ public class MessageActivity extends AppCompatActivity {
                 ;
 
 
-                if(!msg.equals(""))
+                if(!cm.equals(""))
                  {
                      sendMessage(fuser.getUid(),useid,msg);
                      final DatabaseReference mdb=FirebaseDatabase.getInstance().getReference("user");
+                     final String finalMsg = cm;
                      mdb.addValueEventListener(new ValueEventListener() {
                          @Override
                          public void onDataChange(@NonNull DataSnapshot snapshot) {
-                             if(snapshot!=null)
+                             if(snapshot!=null && snapshot.child(useid).child("notificationKey").exists())
                              {
-                                 Toast.makeText(getApplicationContext(),snapshot.child("notificationKey").getValue().toString(),Toast.LENGTH_SHORT).show();
-
-                                 try {
-                                     sendNotifications(msg, snapshot.child(fuser.getUid()).child("name").getValue().toString(), snapshot.child(useid).child("notificationKey").getValue().toString());
-                                 } catch (JSONException e) {
-                                     e.printStackTrace();
-                                 }
+                                 FcmNotificationsSender fcm=new FcmNotificationsSender(snapshot.child(useid).child("notificationKey").getValue().toString(),snapshot.child(fuser.getUid()).child("name").getValue().toString(), finalMsg,getApplicationContext(),MessageActivity.this);
+                                 fcm.SendNotifications();
                              }
                          }
 
@@ -335,13 +309,8 @@ public class MessageActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot!=null)
                         {
-                            //Toast.makeText(getApplicationContext(),snapshot.child("notificationKey").getValue().toString(),Toast.LENGTH_SHORT).show();
-
-                            try {
-                                sendNotifications("Send you image", snapshot.child(fuser.getUid()).child("name").getValue().toString(), snapshot.child(useid).child("notificationKey").getValue().toString());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            FcmNotificationsSender fcm=new FcmNotificationsSender(snapshot.child(useid).child("notificationKey").getValue().toString(),snapshot.child(fuser.getUid()).child("name").getValue().toString(), "Send Image",getApplicationContext(),MessageActivity.this);
+                            fcm.SendNotifications();
                         }
                     }
 
@@ -366,7 +335,6 @@ public class MessageActivity extends AppCompatActivity {
 
                 if (options[item].equals("Take Photo")) {
                     askpermission();
-
                 }
                 else if (options[item].equals("Choose from Gallery")) {
                         Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -536,14 +504,6 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-    public void sendNotifications(String message, String heading, String notificationKey) throws JSONException {
-        JSONObject notificationObject=new JSONObject(
-                "{'contents':{'en':'" + message + "'},"+
-                        "'include_player_ids':['" + notificationKey + "'],"+
-                        "'headings':{'en':'" + heading + "'}}");
-        OneSignal.postNotification(notificationObject,null);
-    }
-
 
 
     private void sendImageMessage(Uri selectedImage) throws IOException {
@@ -636,14 +596,15 @@ public class MessageActivity extends AppCompatActivity {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-
+//                Log.e("Erroor", ex.toString());
+                Toast.makeText(getApplicationContext(),ex.toString(),Toast.LENGTH_SHORT).show();
             }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
 
+            if (photoFile != null) {
+//                Toast.makeText(getApplicationContext(),"land",Toast.LENGTH_SHORT).show();
                 Uri photoURI = FileProvider.getUriForFile(MessageActivity.this,
                         "com.example.mymessage.fileprovider", photoFile);
-                Log.d("Errora",photoFile.toString());
+//                Log.d("Errora",photoFile.toString());
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, 0);
             }
@@ -655,13 +616,12 @@ public class MessageActivity extends AppCompatActivity {
 
 
     public File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
         String pictureFile = "Mymessage_" + timeStamp;
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(pictureFile,  ".jpg", storageDir);
         currentPhotoPath = image.getAbsolutePath();
         return image;
-
     }
 
     @Override
