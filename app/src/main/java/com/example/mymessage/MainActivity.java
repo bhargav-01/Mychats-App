@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        FirebaseApp.initializeApp(this);
         userIsLoggedIn();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         setContentView(R.layout.activity_main);
         number = findViewById(R.id.number);
         send = findViewById(R.id.send);

@@ -127,6 +127,7 @@ public class MessageActivity extends AppCompatActivity {
         attachBtn=findViewById(R.id.sendImage);
         msg_editText=findViewById(R.id.text_send);
         back=findViewById(R.id.back);
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
