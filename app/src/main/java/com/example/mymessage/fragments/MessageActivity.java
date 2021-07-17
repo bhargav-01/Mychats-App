@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -487,13 +488,13 @@ public class MessageActivity extends AppCompatActivity {
                         }
 
                         ChatObject chat=new ChatObject(sender,receiver,message,type);
-
-                            if(chat.getReceiver().equals(myid) && chat.getSender().equals(userid) || chat.getReceiver().equals(userid) && chat.getSender().equals(myid) )
-                            {
-                               mChat.add(chat);
-                            }
-                            messageAdapter =new MessageAdapter(MessageActivity.this,mChat,imageurl);
-                            recyclerView.setAdapter(messageAdapter);
+                        Log.e("land",myid+" "+userid);
+                        if((chat.getReceiver().equals(myid) && chat.getSender().equals(userid)) || (chat.getReceiver().equals(userid) && chat.getSender().equals(myid)) )
+                        {
+                           mChat.add(chat);
+                        }
+                        messageAdapter =new MessageAdapter(MessageActivity.this,mChat,imageurl);
+                        recyclerView.setAdapter(messageAdapter);
                 }
             }
 

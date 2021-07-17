@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/aclonica"
             android:textColor="#FCFCFD"
-            android:text="My message"
+            android:text="Mychats"
             android:textSize="30sp" />
     </LinearLayout>
 

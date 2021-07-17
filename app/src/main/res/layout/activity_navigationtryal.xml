@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="My Message"
+                android:text="Mychats"
                 android:textAlignment="textStart"
                 android:textColor="#242E4C"
                 android:textSize="35sp" />

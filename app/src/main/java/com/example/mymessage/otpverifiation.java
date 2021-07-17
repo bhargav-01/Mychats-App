@@ -45,7 +45,7 @@ public class otpverifiation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        FirebaseApp.initializeApp(this);
+//        FirebaseApp.initializeApp(this);
         userIsLoggedIn();
         setContentView(R.layout.activity_otpverifiation);
         Intent intent=getIntent();
