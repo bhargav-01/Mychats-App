@@ -1,8 +1,6 @@
 # MyChats
 
 # Login option with OTP verification
-
-## Home Screen
 <img src="https://github.com/bhargav-01/Mychats-App/blob/main/ScreenShots/login.png" width=300 height=550></img>
 <img src="https://github.com/bhargav-01/Mychats-App/blob/main/ScreenShots/otp.png" width=300 height=550></img>
 ## Main Screen
